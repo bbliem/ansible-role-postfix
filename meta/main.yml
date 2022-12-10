@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Bernhard Bliem
+  description: Ansible role for Postfix on Debian and similar systems (e.g., Ubuntu)
+  license: MIT
+  min_ansible_version: 2.10
+  galaxy_tags: []
+  dependencies:
+    - role: oefenweb.duplicity
+      vars:
+        duplicity_install_method: ppa
+        duplicity_install:
+          - haveged
+          - python3-boto3
+          - jq

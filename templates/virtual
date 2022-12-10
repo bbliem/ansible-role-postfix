@@ -1,0 +1,2 @@
+{% for alias in postfix_virtual_aliases %}{{ alias }}
+{% endfor %}

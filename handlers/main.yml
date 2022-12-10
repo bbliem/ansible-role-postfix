@@ -1,0 +1,11 @@
+- name: Reload postfix
+  service:
+    name: postfix
+    enabled: yes
+    state: reloaded
+
+- name: Update aliases
+  command: postalias /etc/aliases
+
+- name: Update virtual aliases
+  command: postmap /etc/postfix/virtual
