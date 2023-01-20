@@ -1,11 +1,11 @@
 - name: Reload postfix
-  service:
+  ansible.builtin.service:
     name: postfix
-    enabled: yes
+    enabled: true
     state: reloaded
 
 - name: Update aliases
-  command: postalias /etc/aliases
+  ansible.builtin.command: postalias /etc/aliases
 
 - name: Update virtual aliases
-  command: postmap /etc/postfix/virtual
+  ansible.builtin.command: postmap /etc/postfix/virtual

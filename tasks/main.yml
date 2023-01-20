@@ -1,24 +1,24 @@
 - name: Configure domain for postfix in debconf
-  debconf:
+  ansible.builtin.debconf:
     name: postfix
     question: postfix/mailname
     vtype: string
     value: "{{ postfix_myorigin }}"
 
 - name: Configure postfix server type in debconf
-  debconf:
+  ansible.builtin.debconf:
     name: postfix
     question: postfix/main_mailer_type
     vtype: string
     value: Internet Site
 
 - name: Install postfix
-  package:
+  ansible.builtin.package:
     name: postfix
     state: present
 
 - name: Copy postfix configuration
-  template:
+  ansible.builtin.template:
     src: "{{ item }}"
     dest: /etc/postfix/{{ item }}
     mode: 0644
@@ -28,34 +28,34 @@
   notify: Reload postfix
 
 - name: Set up aliases
-  template:
+  ansible.builtin.template:
     src: aliases
     dest: /etc/aliases
     mode: 0644
   notify: Update aliases
 
 - name: Set up virtual aliases
-  template:
+  ansible.builtin.template:
     src: virtual
     dest: /etc/postfix/virtual
     mode: 0644
   notify: Update virtual aliases
 
 - name: Install SPF package
-  package:
+  ansible.builtin.package:
     name: postfix-policyd-spf-python
     state: present
   notify: Reload postfix
 
 - name: Set up opendkim
-  include_role:
+  ansible.builtin.include_role:
     name: sunfoxcz.dkim
     apply:
       tags: dkim
   tags: dkim
 
 - name: Open ports
-  ufw:
+  community.general.ufw:
     rule: allow
     proto: tcp
     port: "{{ item }}"
