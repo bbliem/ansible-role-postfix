@@ -21,7 +21,7 @@
   ansible.builtin.template:
     src: "{{ item }}"
     dest: /etc/postfix/{{ item }}
-    mode: 0644
+    mode: '0644'
   loop:
     - main.cf
     - master.cf
@@ -31,14 +31,14 @@
   ansible.builtin.template:
     src: aliases
     dest: /etc/aliases
-    mode: 0644
+    mode: '0644'
   notify: Update aliases
 
 - name: Set up virtual aliases
   ansible.builtin.template:
     src: virtual
     dest: /etc/postfix/virtual
-    mode: 0644
+    mode: '0644'
   notify: Update virtual aliases
 
 - name: Install SPF package
@@ -53,6 +53,15 @@
     apply:
       tags: dkim
   tags: dkim
+
+- name: Fix permission problems with DKIM keys
+  ansible.builtin.file:
+    path: /etc/opendkim/keys/{{ item }}
+    state: directory
+    owner: opendkim
+    group: opendkim
+    mode: '0750'
+  loop: "{{ dkim_domains }}"
 
 - name: Open ports
   community.general.ufw:
