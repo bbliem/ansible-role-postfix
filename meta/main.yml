@@ -13,4 +13,4 @@ galaxy_info:
         - jammy
   galaxy_tags: []
 
-dependencies: []
+dependencies: []  # but see meta/requirements.yml as per https://docs.ansible.com/ansible/2.10/galaxy/user_guide.html#using-meta-requirements-yml

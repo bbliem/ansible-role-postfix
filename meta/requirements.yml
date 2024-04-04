@@ -1,1 +1,3 @@
-- src: sunfoxcz.dkim
+- name: sunfoxcz.dkim
+  src: https://github.com/FoxyRoles/ansible-dkim
+  version: 1864d0ecd81b70a1146da5cf5103551dd6a364c8
