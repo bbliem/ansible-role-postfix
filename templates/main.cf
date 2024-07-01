@@ -3,6 +3,7 @@ alias_maps = hash:/etc/aliases
 append_dot_mydomain = no
 biff = no
 compatibility_level = 3.6
+home_mailbox = mail/
 inet_interfaces = all
 inet_protocols = all
 mailbox_size_limit = 0
